@@ -29,7 +29,7 @@ Apple Color and Size Transition: Apples are represented by red and green semi-ci
 
 Smooth Transitions: The lerpColor function ensures all color transitions are smooth, while Perlin noise provides realistic motion effects for the tree branches and cloud/snowflake movements, enhancing the natural feel of the animation.
 
-**References**:
+**References:**
 
 lerpColor function for color interpolation: p5.js Reference
 Noise-based animation (noise) for smooth, pseudo-random movements: Perlin Noise in p5.js
@@ -40,61 +40,44 @@ This code creates a dynamic, seasonal animation scene featuring elements such as
 
 #### 1. **Gradient Background Transition**
 
-The code defines specific colors for each season (such as `springColor1`, `summerColor1`, etc.) to reflect seasonal changes. Each season is represented with two main color tones to create a gradient effect.
+The code defines specific colors for each season (such as springColor1, summerColor1, etc.) to reflect seasonal changes. Each season is represented with two main color tones to create a gradient effect.
 
-- **Smooth Transition**: The `lerpColor` function is used to interpolate between the current (`currentBgColor1`, `currentBgColor2`) and target background colors (`targetBgColor1`, `targetBgColor2`), enabling a smooth color transition.
-- **Creating the Gradient**: The `drawGradientBackground` function iterates over several horizontal bands across the canvas, each one blending the colors between two tones. This creates a seamless gradient that reflects seasonal changes.
+- **Smooth Transition**: The lerpColor function is used to interpolate between the current (currentBgColor1, currentBgColor2) and target background colors (targetBgColor1, targetBgColor2), enabling a smooth color transition.
+- **Creating the Gradient**: The drawGradientBackground function iterates over several horizontal bands across the canvas, each one blending the colors between two tones. This creates a seamless gradient that reflects seasonal changes.
 
 
 #### 2. **Cloud and Snowflake Animations**
 
-The code includes cloud and snowflake animations, represented by the `Cloud` and `Snowflake` classes. These classes define properties such as position, size, and movement behavior.
+The code includes cloud and snowflake animations, represented by the Cloud and Snowflake classes. These classes define properties such as position, size, and movement behavior.
 
 - **Cloud Movement**: Clouds move horizontally across the screen, resetting to the left edge when they reach the right boundary. Each cloud’s position is updated each frame to create continuous movement.
 - **Snowflake Animation**: Snowflakes fall vertically, simulating snowfall. Each snowflake’s position is reset to the top of the screen once it reaches the bottom, so snowflakes continuously fall during the winter season.
 - **Seasonal Appearance**: Snowflakes only appear in winter, creating a seasonal effect.
 
----
 
 #### 3. **Tree Animation with Perlin Noise**
 
 The tree branches use **Perlin Noise** to create a smooth, natural swaying effect that simulates the wind.
 
-- **Swaying Effect**: Using Perlin noise in the `draw` function generates smooth pseudo-random values, giving each branch a gentle swaying motion.
+- **Swaying Effect**: Using Perlin noise in the draw function generates smooth pseudo-random values, giving each branch a gentle swaying motion.
 - **Organic Animation**: By applying different Perlin noise offsets to each branch, the branches appear to sway independently, enhancing the realism of the animation.
 
----
 
 #### 4. **Apple Color and Size Transition**
 
 The apples, represented by red and green semi-circles, change color and size gradually from spring to autumn to mimic growth and ripening.
 
-- **Color Transition**: The `currentRedColor` and `currentGreenColor` variables gradually transition to their target colors (`targetRedColor` and `targetGreenColor`) based on the season. This is done smoothly using the `lerpColor` function, allowing the colors to intensify as apples mature.
-- **Size Growth**: The apple size, `appleSize`, grows steadily from spring through autumn, reflecting the natural growth of the fruit. This gradual increase in size is controlled based on seasonal progress, using linear growth to create a natural effect.
-
----
+- **Color Transition**: The currentRedColor and currentGreenColor variables gradually transition to their target colors (targetRedColor and targetGreenColor) based on the season. This is done smoothly using the lerpColor function, allowing the colors to intensify as apples mature.
+- **Size Growth**: The apple size, appleSize, grows steadily from spring through autumn, reflecting the natural growth of the fruit. This gradual increase in size is controlled based on seasonal progress, using linear growth to create a natural effect.
 
 #### 5. **Seasonal Transitions**
 
-The code uses a combination of `lerpColor` and `noise` functions to create smooth seasonal transitions across various elements.
+The code uses a combination of lerpColor and noise functions to create smooth seasonal transitions across various elements.
 
-- **Season Progression**: The `seasonProgress` variable, calculated based on `frameCount`, determines the current point within a seasonal cycle. Each complete cycle spans `seasonLength` frames (e.g., 3000 frames for one full seasonal cycle).
+- **Season Progression**: The seasonProgress variable, calculated based on frameCount, determines the current point within a seasonal cycle. Each complete cycle spans seasonLength frames (e.g., 3000 frames for one full seasonal cycle).
 - **Color and Size Transition**: By updating target colors, background tones, and apple properties (color and size) according to the current season, the code smoothly transitions elements as the seasons change.
 
-### Technical Summary
+#### Technical Summary
 
-This code achieves smooth seasonal animations by using the `lerpColor` function for gradual color transitions and `Perlin noise` for natural movement effects in tree branches and other elements. The result is a dynamic, nature-inspired scene where elements adjust with seasonal progression, adding a natural feel to the animation. 
+This code achieves smooth seasonal animations by using the lerpColor function for gradual color transitions and Perlin noise for natural movement effects in tree branches and other elements. The result is a dynamic, nature-inspired scene where elements adjust with seasonal progression, adding a natural feel to the animation. 
 
-
-
-If you copy a technique from the Internet, explain how it works, why you used it, and where it came from.
-
-
-
-关于您的个人代码如何为图像制作动画以及任何适当的参考的简短技术说明。
-
-如果您对组代码做了很多更改，请在这里解释。
-
-如果您使用课程之外的工具和技术，请解释您使用它们的原因以及它们的工作原理。
-
-如果您从互联网上复制了某种技术，请解释其工作原理、您使用它的原因以及它的来源。
