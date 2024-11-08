@@ -17,6 +17,10 @@ let swayNoiseOffset;
 let clouds = []; // Array to store clouds
 let snowflakes = []; // Array to store snowflakes
 
+// Apple color variables
+let currentRedColor, currentGreenColor;
+let targetRedColor, targetGreenColor;
+
 class Cloud {
   constructor(x, y) {
     this.x = x;
@@ -33,7 +37,6 @@ class Cloud {
 
   show() {
     noStroke();
-    // Create gradient effect for each cloud element
     for (let i = 0; i <= this.size; i += 2) {
       let cloudColor = color(255, 255, 255, 200); // White semi-transparent clouds
       fill(cloudColor);
@@ -101,10 +104,15 @@ function setup() {
 
   initializeClouds();
   initializeSnowflakes(); // Initialize snowflakes
+
+  // Initialize apple colors
+  currentRedColor = color(200, 60, 60);
+  currentGreenColor = color(80, 160, 90);
+  targetRedColor = currentRedColor;
+  targetGreenColor = currentGreenColor;
 }
 
 function drawGradientBackground() {
-  // Create gradient pattern
   for(let y = 0; y < height; y += height/10) {
     let inter1 = map(y, 0, height, 0, 1);
     let inter2 = map(y + height/10, 0, height, 0, 1);
@@ -112,7 +120,6 @@ function drawGradientBackground() {
     let c1 = lerpColor(currentBgColor1, currentBgColor2, inter1);
     let c2 = lerpColor(currentBgColor1, currentBgColor2, inter2);
     
-    // Draw gradient rect
     noStroke();
     beginShape();
     fill(c1);
@@ -133,25 +140,32 @@ function draw() {
   if (seasonProgress < 0.25) { // Spring
     targetBgColor1 = springColor1;
     targetBgColor2 = springColor2;
+    targetRedColor = color(200, 60, 60);
+    targetGreenColor = color(80, 160, 90);
   } else if (seasonProgress < 0.5) { // Summer
     targetBgColor1 = summerColor1;
     targetBgColor2 = summerColor2;
+    targetRedColor = color(255, 100, 100);
+    targetGreenColor = color(100, 200, 110);
   } else if (seasonProgress < 0.75) { // Autumn
     targetBgColor1 = autumnColor1;
     targetBgColor2 = autumnColor2;
+    targetRedColor = color(255, 60, 60);
+    targetGreenColor = color(50, 180, 70);
   } else { // Winter
     targetBgColor1 = winterColor1;
     targetBgColor2 = winterColor2;
+    targetRedColor = color(200, 60, 60);
+    targetGreenColor = color(80, 160, 90);
   }
 
   // Smoothly transition the background colors
-  bgTransitionProgress += 0.005;
-  if (bgTransitionProgress > 1) {
-    bgTransitionProgress = 1;
-  }
-  
   currentBgColor1 = lerpColor(currentBgColor1, targetBgColor1, 0.01);
   currentBgColor2 = lerpColor(currentBgColor2, targetBgColor2, 0.01);
+
+  // Smoothly transition the apple colors
+  currentRedColor = lerpColor(currentRedColor, targetRedColor, 0.01);
+  currentGreenColor = lerpColor(currentGreenColor, targetGreenColor, 0.01);
 
   // Draw the gradient background
   drawGradientBackground();
@@ -179,25 +193,20 @@ function draw() {
     let growthFactor;
     
     if (seasonProgress < 0.75) { // Spring through Autumn
-      // Calculate growth progress from spring to autumn (0 to 0.75)
-      // Using a sine curve for more natural growth pattern
       let growthProgress = map(seasonProgress, 0, 0.75, 0, PI);
-      growthFactor = sin(growthProgress) * 0.3; // Smoother growth curve
+      growthFactor = sin(growthProgress) * 0.3;
       
       if (circleSizes[i] < maxSize * scaleFactor) {
         circleSizes[i] += growthSpeed * growthFactor * scaleFactor;
       }
     } else { // Winter
-      // Fruits fall off in winter
       circleSizes[i] = max(0, circleSizes[i] - growthSpeed * 2 * scaleFactor);
     }
     
-    // Ensure size doesn't exceed maximum
     circleSizes[i] = min(circleSizes[i], maxSize * scaleFactor);
   }
 }
 
-// Draw the base structure (flowerpot)
 function drawBaseStructure(scaleFactor) {
   fill(150, 180, 100);
   noStroke();
@@ -269,9 +278,9 @@ function drawHorizontalCircles(x, y, count, size, direction, indexStart, scaleFa
 
 function drawColoredCircle(x, y, size) {
   noStroke();
-  fill(200, 60, 60);
+  fill(currentRedColor);
   arc(x, y, size, size, PI, 0);
-  fill(80, 160, 90);
+  fill(currentGreenColor);
   arc(x, y, size, size, 0, PI);
 }
 
