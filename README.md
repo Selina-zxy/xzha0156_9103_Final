@@ -80,4 +80,3 @@ The code uses a combination of lerpColor and noise functions to create smooth se
 #### Technical Summary
 
 This code achieves smooth seasonal animations by using the lerpColor function for gradual color transitions and Perlin noise for natural movement effects in tree branches and other elements. The result is a dynamic, nature-inspired scene where elements adjust with seasonal progression, adding a natural feel to the animation. 
-
